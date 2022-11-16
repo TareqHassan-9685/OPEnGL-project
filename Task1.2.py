@@ -1,0 +1,71 @@
+from OpenGL.GL import *
+from OpenGL.GLUT import *
+from OpenGL.GLU import *
+def task02():
+    x = 250
+    y = 250
+    glBegin(GL_TRIANGLES)
+    glVertex2f(x, y + 200)
+    glVertex2f(x + 80, y + 60)
+    glVertex2f(x - 80, y + 60)
+    glEnd()
+
+    glBegin(GL_QUADS) #right window
+    glVertex2f(x + 50, y+40)
+    glVertex2f(x + 50, y+10 )
+    glVertex2f(x + 70, y+10)
+    glVertex2f(x + 70, y+40)
+    glEnd()
+    glBegin(GL_QUADS)
+    glVertex2f(x + 30, y)
+    glVertex2f(x + 30, y - 90)
+    glVertex2f(x - 30, y - 90)
+    glVertex2f(x - 30, y)
+    glEnd()
+    glBegin(GL_QUADS) #left
+    glVertex2f(x - 50, y+40)
+    glVertex2f(x - 50, y+10)
+    glVertex2f(x - 70, y+10)
+    glVertex2f(x - 70, y+40)
+    glEnd()
+    glPointSize(2)
+    glBegin(GL_POINTS)
+    glColor3f(0, 0, 0)
+    glVertex2f(195,275)
+    glVertex2f(303, 275)
+    glVertex2f(270, 200)
+    glEnd()
+    glBegin(GL_LINES)
+    glColor3f(3.0, 2.0, 4.0)
+    glVertex2f(x + 80, y - 90)
+    glVertex2f(x + 80, y + 60)
+
+    glVertex2f(x - 80, y + 60)
+    glVertex2f(x - 80, y - 90)
+    glVertex2f(x - 80, y - 90)
+    glVertex2f(x + 80, y - 90)
+    glEnd()
+def iterate():
+    glViewport(0, 0, 500, 500)
+    glMatrixMode(GL_PROJECTION)
+    glLoadIdentity()
+    glOrtho(0.0, 500, 0.0, 500, 0.0, 1.0)
+    glMatrixMode(GL_MODELVIEW)
+    glLoadIdentity()
+def showScreen():
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    glLoadIdentity()
+    iterate()
+    glColor3f(1.0, 0.0, 3.0)
+    glPointSize(3)
+# call the draw methods here
+    task02()
+    glutSwapBuffers()
+glutInit()
+glutInitDisplayMode(GLUT_RGBA)
+glutInitWindowSize(500, 500)
+glutInitWindowPosition(0, 0)
+wind = glutCreateWindow(b"Task-2")
+glutDisplayFunc(showScreen)
+glutIdleFunc(showScreen)
+glutMainLoop()
